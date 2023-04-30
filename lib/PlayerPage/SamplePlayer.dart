@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flick_video_player/flick_video_player.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:video_player/video_player.dart';
 
 class SamplePlayer extends StatefulWidget {
-  SamplePlayer({Key? key}) : super(key: key);
+  String urlv;
+  SamplePlayer(this.urlv);
 
   @override
   _SamplePlayerState createState() => _SamplePlayerState();
@@ -11,12 +13,15 @@ class SamplePlayer extends StatefulWidget {
 
 class _SamplePlayerState extends State<SamplePlayer> {
   late FlickManager flickManager;
+  late String urlvideo;
+
   @override
   void initState() {
     super.initState();
+
     flickManager = FlickManager(
         videoPlayerController: VideoPlayerController.network(
-          "https://download1486.mediafire.com/lhojutdffjkg/6udcu6b0onjnuv5/mucho_de_mi.mp4",
+          widget.urlv,
         ),
         autoPlay: true);
   }

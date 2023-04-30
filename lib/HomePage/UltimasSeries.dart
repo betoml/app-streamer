@@ -9,6 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../settings/settings.dart';
 import 'package:http/http.dart' as http;
 
+import '../widgetsGlobales/preload.dart';
+
 class UltimasSeries extends StatefulWidget {
   const UltimasSeries({Key? key}) : super(key: key);
 
@@ -27,12 +29,11 @@ class _UltimasSeriesState extends State<UltimasSeries> {
 
   @override
   Widget build(BuildContext context) {
-    // return Text('asdsa asdasda');
     return FutureBuilder(
       future: setUltimasSeries,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
+          return const Preload();
         } else {
           return Padding(
             padding: const EdgeInsets.all(8.0),

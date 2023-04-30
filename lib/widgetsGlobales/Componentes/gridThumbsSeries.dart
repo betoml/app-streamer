@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/Favoritos/getFavoritosAllSeriesModel.dart';
 import '../../servicios/Favoritos/getFavoritosAllSeries.dart';
+import '../preload.dart';
 
 class GridThumbSeries extends StatefulWidget {
   @override
@@ -29,7 +30,7 @@ class _GridThumbSeriesState extends State<GridThumbSeries> {
       builder: (context, snapshot) {
         final data = snapshot.data;
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return const Preload();
         } else {
           if (data == null) {
             return const Text('No hay elementos');

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:euforia/settings/settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../widgetsGlobales/preload.dart';
+
 class PeliculasAllPage extends StatefulWidget {
   const PeliculasAllPage({Key? key}) : super(key: key);
 
@@ -27,11 +29,10 @@ class _PeliculasAllPageState extends State<PeliculasAllPage> {
             stops: [0.2, 0.8],
           ),
         ),
-        child: Expanded(
-            child: Padding(
+        child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: PeliculasListado(),
-        )),
+        ),
       ),
     );
   }
@@ -57,7 +58,7 @@ class _PeliculasListadoState extends State<PeliculasListado> {
       future: setPeliculasAll,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return const Preload();
         } else {
           if (snapshot.data == null) {
             return Text('Todavía no se subieron películas');

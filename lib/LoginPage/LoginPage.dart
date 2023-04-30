@@ -28,18 +28,35 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    Future logueado() async {
+    verificarToken() async {
       final Future<SharedPreferences> _localStorage =
           SharedPreferences.getInstance();
       final SharedPreferences localStorage = await _localStorage;
 
-      if (localStorage.get('token') != null) {
-        // ignore: use_build_context_synchronously
-        Navigator.pushNamed(context, '/home');
+      if (localStorage.getString('token') != null) {
+        var headers = {'Authorization': 'Bearer ${localStorage.get('token')}'};
+        var request = http.Request('POST',
+            Uri.parse(EndPoints().baseUrlApi + EndPoints().verificarToken));
+
+        request.headers.addAll(headers);
+
+        http.StreamedResponse response = await request.send();
+
+        if (response.statusCode == 200) {
+          // print(true);
+          // ignore: use_build_context_synchronously
+          Navigator.pushNamed(context, '/home');
+        } else {
+          // print(false);
+          // ignore: use_build_context_synchronously
+
+          localStorage.remove('token');
+        }
       }
     }
 
-    logueado();
+    verificarToken();
+
     return const Scaffold(
       body: Background(),
     );

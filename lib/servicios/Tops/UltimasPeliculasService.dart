@@ -3,12 +3,14 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:euforia/servicios/endpoints.dart';
+import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/Tops/UltimasPeliculasModel.dart';
+import 'package:flutter/material.dart';
 
 Future<List<UltimasPeliculasModel>> getUltimasPeliculas() async {
   final Future<SharedPreferences> _localStorage =
@@ -23,7 +25,7 @@ Future<List<UltimasPeliculasModel>> getUltimasPeliculas() async {
     },
   );
 
-  // print(json.decode(response.body));
+  //print(json.decode(response.body));
 
   return ultimasPeliculasModelFromJson(response.body);
 }

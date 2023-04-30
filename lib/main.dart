@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'dart:io';
 
 import 'package:euforia/PeliculasDetailPage/PeliculasDetailPage.dart';
@@ -14,10 +12,12 @@ import 'HomePage/HomePage.dart';
 import 'LoginPage/LoginPage.dart';
 import 'package:flutter/material.dart';
 
-import 'PlayerPage/PlayerPage.dart';
+//import 'PlayerPage/PlayerPage.dart';
 
-void main() {
+void main() async {
   HttpOverrides.global = MyHttpOverrides();
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const EuforiaApp());
 }
 
@@ -34,14 +34,14 @@ class EuforiaApp extends StatelessWidget {
         ),
       ),
       routes: {
-        '/home': (context) => HomePage(),
-        '/': (context) => LoginPage(),
-        '/peliculasdetail': (context) => PeliculasDetailPage(),
-        '/seriesdetail': (context) => SeriesDetailPage(),
-        '/venatana-emergente': (context) => VentanaEmergente(),
-        '/player': (context) => PlayerPage(),
-        '/peliculas-all': (context) => PeliculasAllPage(),
-        '/series-all': (context) => SeriesAllPage(),
+        '/home': (context) => const HomePage(),
+        '/': (context) => const LoginPage(),
+        '/peliculasdetail': (context) => const PeliculasDetailPage(),
+        '/seriesdetail': (context) => const SeriesDetailPage(),
+        '/venatana-emergente': (context) => const VentanaEmergente(),
+        // '/player': (context) => PlayerPage(''),
+        '/peliculas-all': (context) => const PeliculasAllPage(),
+        '/series-all': (context) => const SeriesAllPage(),
       },
       initialRoute: '/',
     );

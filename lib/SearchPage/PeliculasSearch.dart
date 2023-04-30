@@ -9,6 +9,7 @@ import '../servicios/Search/searchFilmService.dart';
 import '../servicios/Search/searchSeriesService,.dart';
 import '../servicios/endpoints.dart';
 import '../settings/settings.dart';
+import '../widgetsGlobales/preload.dart';
 
 class PeliculasSearch extends StatefulWidget {
   String textSearch;
@@ -55,7 +56,7 @@ class _PeliculasSearchState extends State<PeliculasSearch> {
               length: 2,
               child: Scaffold(
                 appBar: PreferredSize(
-                  preferredSize: Size.fromHeight(75.0),
+                  preferredSize: const Size.fromHeight(75.0),
                   child: AppBar(
                     automaticallyImplyLeading: false,
                     backgroundColor: bgSecondary_4,
@@ -78,9 +79,9 @@ class _PeliculasSearchState extends State<PeliculasSearch> {
                     Container(
                       height: double.infinity,
                       width: double.infinity,
-                      decoration: BoxDecoration(color: bgSecondary_4),
+                      decoration: const BoxDecoration(color: bgSecondary_4),
                       child: Padding(
-                        padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                         child: Padding(
                             padding: const EdgeInsets.only(
                                 top: 30.0, left: 10.0, right: 10.0),
@@ -89,35 +90,49 @@ class _PeliculasSearchState extends State<PeliculasSearch> {
                               builder: (context, snapshot) {
                                 if (snapshot.connectionState ==
                                     ConnectionState.waiting) {
-                                  return CircularProgressIndicator();
+                                  return const Preload();
                                 } else {
-                                  return GridView.builder(
-                                    gridDelegate:
-                                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                                            maxCrossAxisExtent: 140,
-                                            childAspectRatio: 2 / 3,
-                                            crossAxisSpacing: 5,
-                                            mainAxisSpacing: 5),
-                                    itemCount: snapshot.data!.length,
-                                    itemBuilder: (context, index) {
-                                      final datosFilm = snapshot.data![index];
-                                      return GestureDetector(
-                                        onTap: () async {
-                                          final Future<SharedPreferences>
-                                              _localStorage =
-                                              SharedPreferences.getInstance();
-                                          final SharedPreferences localStorage =
-                                              await _localStorage;
-                                          localStorage.setString('peliculas_id',
-                                              datosFilm.idThmdb.toString());
-                                          Navigator.pushNamed(
-                                              context, '/peliculasdetail');
-                                        },
-                                        child:
-                                            Image.network(datosFilm.imgThumb),
-                                      );
-                                    },
-                                  );
+                                  if (snapshot.data == null) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(
+                                            duration: Duration(seconds: 15),
+                                            content: Text(
+                                                'Se ha cerrado la sesión, otro usuario ha entrado y se ha superado el limite de conexiones de su plan')));
+                                    Navigator.pushNamed(context, '/');
+                                    return const Text(
+                                        'No se ha podido cargar los elementos');
+                                  } else {
+                                    return GridView.builder(
+                                      gridDelegate:
+                                          const SliverGridDelegateWithMaxCrossAxisExtent(
+                                              maxCrossAxisExtent: 140,
+                                              childAspectRatio: 2 / 3,
+                                              crossAxisSpacing: 5,
+                                              mainAxisSpacing: 5),
+                                      itemCount: snapshot.data!.length,
+                                      itemBuilder: (context, index) {
+                                        final datosFilm = snapshot.data![index];
+                                        return GestureDetector(
+                                          onTap: () async {
+                                            final Future<SharedPreferences>
+                                                _localStorage =
+                                                SharedPreferences.getInstance();
+                                            final SharedPreferences
+                                                localStorage =
+                                                await _localStorage;
+                                            localStorage.setString(
+                                                'peliculas_id',
+                                                datosFilm.idThmdb.toString());
+                                            // ignore: use_build_context_synchronously
+                                            Navigator.pushNamed(
+                                                context, '/peliculasdetail');
+                                          },
+                                          child:
+                                              Image.network(datosFilm.imgThumb),
+                                        );
+                                      },
+                                    );
+                                  }
                                 }
                               },
                             )),
@@ -126,9 +141,9 @@ class _PeliculasSearchState extends State<PeliculasSearch> {
                     Container(
                       height: double.infinity,
                       width: double.infinity,
-                      decoration: BoxDecoration(color: bgSecondary_4),
+                      decoration: const BoxDecoration(color: bgSecondary_4),
                       child: Padding(
-                        padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                         child: Padding(
                             padding: const EdgeInsets.only(
                                 top: 30.0, left: 10.0, right: 10.0),
@@ -137,7 +152,7 @@ class _PeliculasSearchState extends State<PeliculasSearch> {
                               builder: (context, snapshot) {
                                 if (snapshot.connectionState ==
                                     ConnectionState.waiting) {
-                                  return CircularProgressIndicator();
+                                  return const Preload();
                                 } else {
                                   return GridView.builder(
                                     gridDelegate:

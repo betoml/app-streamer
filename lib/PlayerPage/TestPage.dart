@@ -17,9 +17,9 @@ class _TestPageState extends State<TestPage> {
         child: OrientationBuilder(
           builder: (context, orientation) {
             if (orientation == Orientation.portrait) {
-              return RotatedBox(quarterTurns: 1, child: SamplePlayer());
+              return RotatedBox(quarterTurns: 1, child: SamplePlayer(''));
             } else {
-              return RotatedBox(quarterTurns: 4, child: SamplePlayer());
+              return RotatedBox(quarterTurns: 4, child: SamplePlayer(''));
             }
           },
         ));

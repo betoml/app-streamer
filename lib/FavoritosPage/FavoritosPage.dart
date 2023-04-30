@@ -78,14 +78,30 @@ class FavoritosPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Container(
-                    height: double.infinity,
-                    width: double.infinity,
-                    decoration: BoxDecoration(color: bgSecondary_4),
-                    child: Padding(
-                      padding:
-                          EdgeInsets.only(top: 20.0, left: 10.0, right: 10.0),
-                      child: GridThumbSeries(),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 20.0, left: 10.0, right: 10.0),
+                    child: Container(
+                      width: double.infinity,
+                      height: 110.0,
+                      decoration: const BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                                color: Color.fromARGB(255, 0, 0, 0),
+                                blurRadius: 5.0,
+                                spreadRadius: 5,
+                                blurStyle: BlurStyle.outer,
+                                offset: Offset.zero)
+                          ],
+                          color: bgSecondary_4,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20.0),
+                              topRight: Radius.circular(20.0))),
+                      child: Padding(
+                        padding:
+                            EdgeInsets.only(top: 20.0, left: 10.0, right: 10.0),
+                        child: GridThumbSeries(),
+                      ),
                     ),
                   ),
                 ],

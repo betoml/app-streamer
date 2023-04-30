@@ -4,6 +4,8 @@ import 'package:euforia/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../preload.dart';
+
 class GridThumbs extends StatefulWidget {
   @override
   _GridThumbsState createState() => _GridThumbsState();
@@ -26,9 +28,10 @@ class _GridThumbsState extends State<GridThumbs> {
       builder: (context, snapshot) {
         final data = snapshot.data;
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return const Preload();
         } else {
           if (data == null) {
+            Navigator.pushNamed(context, '/');
             return const Text('No hay elementos');
           } else {
             return GridView.builder(

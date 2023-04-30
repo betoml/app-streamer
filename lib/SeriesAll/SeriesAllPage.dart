@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../servicios/PeliculasAll/getPeliculasAllService.dart';
 import '../servicios/SeriesAllService.dart/getSeriesAllService.dart';
 import '../settings/settings.dart';
+import '../widgetsGlobales/preload.dart';
 
 class SeriesAllPage extends StatefulWidget {
   const SeriesAllPage({Key? key}) : super(key: key);
@@ -29,11 +30,10 @@ class _SeriesAllPageState extends State<SeriesAllPage> {
             stops: [0.2, 0.8],
           ),
         ),
-        child: Expanded(
-            child: Padding(
+        child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: SeriesListado(),
-        )),
+        ),
       ),
     );
   }
@@ -59,7 +59,7 @@ class _SeriesListadoState extends State<SeriesListado> {
       future: setSeriesAll,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return const Preload();
         } else {
           if (snapshot.data == null) {
             return Text('Todavía no se subieron Series');

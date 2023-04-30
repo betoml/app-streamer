@@ -1,4 +1,3 @@
-//import 'package:euforia/SeriesDetailPage/ButtonActions.dart';
 import 'dart:convert';
 
 import 'package:euforia/SeriesDetail/Sipnosis.dart';
@@ -9,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../settings/settings.dart';
+import '../widgetsGlobales/preload.dart';
 import 'SliderPrincipal.dart';
 
 class SeriesDetailPage extends StatefulWidget {
@@ -47,10 +47,9 @@ class _SeriesDetailPageState extends State<SeriesDetailPage> {
               future: setPeliculasDetail,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
+                  return const Preload();
                 } else {
-                  return Expanded(
-                      child: SingleChildScrollView(
+                  return SingleChildScrollView(
                     scrollDirection: Axis.vertical,
                     child: Column(children: [
                       SliderPrincipal(
@@ -75,7 +74,7 @@ class _SeriesDetailPageState extends State<SeriesDetailPage> {
                         height: 70.0,
                       ),
                     ]),
-                  ));
+                  );
                 }
               },
             )),

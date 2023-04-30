@@ -85,7 +85,7 @@ class _SearchPageState extends State<SearchPage> {
                               backgroundColor: bgPrimary,
                               foregroundColor: textPrimary),
                           onPressed: () async {
-                            print(textImput.text.toString());
+                            // print(textImput.text.toString());
                             setState(() {
                               searchFilm(textImput.text.toString());
                               searchSeries(textImput.text.toString());

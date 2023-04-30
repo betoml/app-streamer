@@ -26,7 +26,7 @@ Future<PeliculasDetailModel> getPeliculasDetail() async {
 
   // print(json.decode(response.body));
 
-  print(jsonDecode(response.body));
+  // print(jsonDecode(response.body));
 
   return peliculasDetailModelFromJson(response.body);
 }

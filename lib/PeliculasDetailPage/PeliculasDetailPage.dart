@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import '../servicios/FilmDetail/FilmDetailServive.dart';
 import '../settings/settings.dart';
+import '../widgetsGlobales/preload.dart';
 import 'SliderPrincipal.dart';
 
 class PeliculasDetailPage extends StatefulWidget {
@@ -43,10 +44,9 @@ class _PeliculasDetailPageState extends State<PeliculasDetailPage> {
             future: setPeliculasDetail,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
+                return const Preload();
               } else {
-                return Expanded(
-                    child: SingleChildScrollView(
+                return SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   child: Column(children: [
                     SliderPrincipal(
@@ -60,20 +60,22 @@ class _PeliculasDetailPageState extends State<PeliculasDetailPage> {
                     ),
 
                     Sipnosis(
-                      snapshot.data!.titulo,
-                      snapshot.data!.duracion.toString(),
-                      snapshot.data!.descripcion,
-                      snapshot.data!.genero1,
-                      snapshot.data!.genero2,
-                      snapshot.data!.genero3,
-                    ),
+                        snapshot.data!.titulo,
+                        snapshot.data!.duracion.toString(),
+                        snapshot.data!.descripcion,
+                        snapshot.data!.genero1,
+                        snapshot.data!.genero2,
+                        snapshot.data!.genero3,
+                        snapshot.data!.url1080,
+                        snapshot.data!.url720,
+                        snapshot.data!.url480),
                     // ignore: prefer_const_constructors
 
                     SizedBox(
                       height: 35.0,
                     ),
                   ]),
-                ));
+                );
               }
             },
           )),

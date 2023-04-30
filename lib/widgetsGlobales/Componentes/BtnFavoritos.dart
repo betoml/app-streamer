@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 import '../../servicios/endpoints.dart';
+import '../preload.dart';
 
 class BtnFavoritos extends StatefulWidget {
   final String idSeccion,
@@ -63,7 +64,7 @@ class _BtnFavoritosState extends State<BtnFavoritos> {
       stream: getFavoritos(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return const Preload();
         } else {
           final mess = snapshot.data!;
           if (mess.message == true) {

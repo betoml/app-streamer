@@ -1,5 +1,5 @@
 class EndPoints {
-  final baseUrlApi = "https://miproyecto-euforiafilm.up.railway.app/api";
+  final baseUrlApi = "https://euforia-films.up.railway.app/api";
   final verificarToken = '/validate-token';
   final login = "/login";
   final logouts = "/logouts";
@@ -24,4 +24,7 @@ class EndPoints {
   final seriesSearch = "/series-search";
   final getCapitulos = '/series-detail-temporadas';
   final seriesAll = "/series-all";
+
+  final obtenerToken = '/password-reset';
+  final verificarTokenReset = '/password-verificar';
 }

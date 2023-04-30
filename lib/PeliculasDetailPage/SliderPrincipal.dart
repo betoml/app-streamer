@@ -1,4 +1,5 @@
 import 'package:euforia/PeliculasDetailPage/PeliculasDetailPage.dart';
+import 'package:euforia/PlayerPage/PlayerPage.dart';
 import 'package:euforia/models/FilmDetail/FilmDetail.dart';
 import 'package:euforia/servicios/FilmDetail/FilmDetailServive.dart';
 import 'package:euforia/settings/settings.dart';
@@ -90,7 +91,7 @@ class SliderPrincipal extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: TextButton.icon(
             style: TextButton.styleFrom(
-              minimumSize: Size(230.0, 43.0),
+              minimumSize: const Size(230.0, 43.0),
               backgroundColor: bgPrimary,
               foregroundColor: textPrimary,
               elevation: 20.0,
@@ -137,12 +138,12 @@ class SliderPrincipal extends StatelessWidget {
                       ),
                       TextButton.icon(
                         onPressed: () async {
-                          final Future<SharedPreferences> _localStorage =
-                              SharedPreferences.getInstance();
-                          final SharedPreferences localStorage =
-                              await _localStorage;
-                          localStorage.setString('url_video', url1080);
-                          Navigator.pushNamed(context, '/player');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    PlayerPage(url1080.toString())),
+                          );
                         },
                         icon: Icon(Icons.movie_filter),
                         label: Text('1080p'),
@@ -150,12 +151,12 @@ class SliderPrincipal extends StatelessWidget {
                       ),
                       TextButton.icon(
                         onPressed: () async {
-                          final Future<SharedPreferences> _localStorage =
-                              SharedPreferences.getInstance();
-                          final SharedPreferences localStorage =
-                              await _localStorage;
-                          localStorage.setString('url_video', url720);
-                          Navigator.pushNamed(context, '/player');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    PlayerPage(url720.toString())),
+                          );
                         },
                         icon: Icon(Icons.movie_filter),
                         label: Text('720p'),
@@ -163,12 +164,12 @@ class SliderPrincipal extends StatelessWidget {
                       ),
                       TextButton.icon(
                         onPressed: () async {
-                          final Future<SharedPreferences> _localStorage =
-                              SharedPreferences.getInstance();
-                          final SharedPreferences localStorage =
-                              await _localStorage;
-                          localStorage.setString('url_video', url480);
-                          Navigator.pushNamed(context, '/player');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    PlayerPage(url480.toString())),
+                          );
                         },
                         icon: Icon(Icons.movie_filter),
                         label: Text('480p'),

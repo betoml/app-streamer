@@ -1,5 +1,10 @@
 import 'package:euforia/settings/settings.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+
+import '../servicios/endpoints.dart';
+import '../servicios/verificar-token.dart';
 
 class FilmPrincipal extends StatelessWidget {
   const FilmPrincipal({Key? key}) : super(key: key);
@@ -21,8 +26,8 @@ class FilmPrincipal extends StatelessWidget {
         ),
         Container(
           alignment: Alignment.center,
-          decoration: BoxDecoration(color: bgSecondary_5, boxShadow: [
-            const BoxShadow(
+          decoration: const BoxDecoration(color: bgSecondary_5, boxShadow: [
+            BoxShadow(
                 color: bgSecondary_4,
                 blurRadius: 12.0,
                 spreadRadius: 0,
@@ -38,15 +43,15 @@ class FilmPrincipal extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushNamed(context, '/peliculas-all');
                   },
-                  icon: Icon(Icons.movie),
-                  label: Text('Películas')),
+                  icon: const Icon(Icons.movie),
+                  label: const Text('Películas')),
               TextButton.icon(
                   style: TextButton.styleFrom(foregroundColor: textPrimary),
                   onPressed: () {
                     Navigator.pushNamed(context, '/series-all');
                   },
-                  icon: Icon(Icons.theaters),
-                  label: Text('Series')),
+                  icon: const Icon(Icons.theaters),
+                  label: const Text('Series')),
             ],
           ),
         ),
